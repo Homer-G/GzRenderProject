@@ -207,7 +207,8 @@ int GzFreeRender(GzRender *render)
 /* 
 -free all renderer resources
 */
-	free(render);
+	render->display = 0;
+	delete render;
 	return GZ_SUCCESS;
 }
 

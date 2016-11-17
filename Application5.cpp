@@ -19,7 +19,7 @@ static char THIS_FILE[] = __FILE__;
 #define new DEBUG_NEW
 #endif
 
-#define INFILE  "ppot.asc"
+#define INFILE  "pot4.asc"
 #define OUTFILE "output_antialiased.ppm"
 
 #define AAKERNEL_SIZE 6
@@ -107,7 +107,7 @@ int Application5::Initialize()
 
 		GzMatrix	rotateY =
 		{
-			.866,	0.0,	-0.5,	0.0,
+			0.866,	0.0,	-0.5,	0.0,
 			0.0,	1.0,	0.0,	0.0,
 			0.5,	0.0,	.866,	0.0,
 			0.0,	0.0,	0.0,	1.0
@@ -116,11 +116,11 @@ int Application5::Initialize()
 
 
 #if 1 	/* set up app-defined camera if desired, else use camera defaults */
-		camera.position[X] = -5;
-		camera.position[Y] = -10;
-		camera.position[Z] = 5;
+		camera.position[X] = -10;
+		camera.position[Y] = 0;
+		camera.position[Z] = 0;
 
-		camera.lookat[X] = 7.8;
+		camera.lookat[X] = 0;
 		camera.lookat[Y] = 0.7;
 		camera.lookat[Z] = 6.5;
 
@@ -207,7 +207,7 @@ int Application5::Initialize()
 
 		status |= GzPushMatrix(m_pRender[i], scale);
 		status |= GzPushMatrix(m_pRender[i], rotateY);
-		status |= GzPushMatrix(m_pRender[i], rotateX);
+		//status |= GzPushMatrix(m_pRender[i], rotateX);
 
 		if (status) exit(GZ_FAILURE);
 	}
