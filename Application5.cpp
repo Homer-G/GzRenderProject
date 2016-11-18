@@ -29,6 +29,8 @@ float AAFilter[AAKERNEL_SIZE][3] =/* each sample is defined by Xshift, Yshift, w
 extern int tex_fun(float u, float v, GzColor color); /* image texture function */
 extern int ptex_fun(float u, float v, GzColor color); /* procedural texture function */
 extern int normal_fun(float u, float v, GzCoord normal);/*normal map*/
+extern int GzFreeHeightTexture(void);
+extern int GzFreeNormalTexture(void);
 
 void shade(GzCoord norm, GzCoord color);
 
@@ -203,6 +205,7 @@ int Application5::Initialize()
 		nameListShader[8] = GZ_NORMAL_MAP;
 		valueListShader[8] = (GzPointer)(normal_fun);
 
+
 		status |= GzPutAttribute(m_pRender[i], 9, nameListShader, valueListShader);
 
 		status |= GzPushMatrix(m_pRender[i], scale);
@@ -347,6 +350,8 @@ int Application5::Clean()
 	delete m_pRender;
 	delete m_pDisplay;
 	status |= GzFreeTexture();
+	status |= GzFreeNormalTexture();
+	status |= GzFreeHeightTexture();
 
 	if (status)
 		return(GZ_FAILURE);

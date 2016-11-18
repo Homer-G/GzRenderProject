@@ -17,7 +17,7 @@ int tex_fun(float u, float v, GzColor color)
   FILE			*fd;
 
   if (reset) {          /* open and load texture file */
-    fd = fopen ("texture.ppm", "rb");
+    fd = fopen ("rock.ppm", "rb");
     if (fd == NULL) {
       fprintf (stderr, "texture file not found\n");
       exit(-1);

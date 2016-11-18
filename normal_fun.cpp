@@ -16,7 +16,7 @@ int normal_fun(float u, float v, GzColor normal)
 	FILE			*fd;
 
 	if (reset_normal) {          /* open and load texture file */
-		fd = fopen("wall_normal.ppm", "rb");
+		fd = fopen("rock_n.ppm", "rb");
 		if (fd == NULL) {
 			fprintf(stderr, "normal file not found\n");
 			exit(-1);
