@@ -139,6 +139,7 @@
     <ClCompile Include="disp.cpp" />
     <ClCompile Include="height_fun.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="NormalMapCreater.cpp" />
     <ClCompile Include="normal_fun.cpp" />
     <ClCompile Include="rend.cpp" />
     <ClCompile Include="RotateDlg.cpp" />

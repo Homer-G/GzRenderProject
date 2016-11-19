@@ -25,13 +25,12 @@ static char THIS_FILE[] = __FILE__;
 #define AAKERNEL_SIZE 6
 float AAFilter[AAKERNEL_SIZE][3] =/* each sample is defined by Xshift, Yshift, weight*/
 { -0.52, 0.38, 0.128,   0.41, 0.56, 0.119,   0.27, 0.08, 0.294,   -0.17, -0.29, 0.249,   0.58, -0.55, 0.104,   -0.31, -0.71, 0.106};
-
+//extern int NormalMapCreater();
 extern int tex_fun(float u, float v, GzColor color); /* image texture function */
 extern int ptex_fun(float u, float v, GzColor color); /* procedural texture function */
-extern int normal_fun(float u, float v, GzCoord normal);/*normal map*/
+extern int normal_fun(float u, float v, GzColor normal);/*normal map*/
 extern int GzFreeHeightTexture(void);
 extern int GzFreeNormalTexture(void);
-
 void shade(GzCoord norm, GzCoord color);
 
 //////////////////////////////////////////////////////////////////////
@@ -134,7 +133,7 @@ int Application5::Initialize()
 
 		status |= GzPutCamera(m_pRender[i], &camera);
 #endif 
-
+		//NormalMapCreater();
 		/* Start Renderer */
 		status |= GzBeginRender(m_pRender[i]);
 

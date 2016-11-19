@@ -6,8 +6,10 @@
 #include	"Gz.h"
 #include	"rend.h"
 
-#define PARALLAX_MAP
-extern int height_fun(float u, float v, GzCoord normal);/*normal map*/
+//#define PARALLAX_MAP
+
+extern float height_fun(float u, float v, float normal);/*normal map*/
+
 void SetUpTangent(GzRender *render, GzCoord FragPos)
 {
 	GzCoord ViewPos;
@@ -36,13 +38,14 @@ void SetUpTangent(GzRender *render, GzCoord FragPos)
 }
 void ParallaxMapping(GzRender *render, GzTextureIndex uv)
 {
-	float height;
-	GzColor heightmap;
+	float height = 0;
+	/*GzColor heightmap;
 	height_fun(uv[0], uv[1], heightmap);
-	height = heightmap[RED];
+	height = heightmap[RED];*/
+	height = height_fun(uv[0], uv[1], height);
 
 	float offset[2];
-	float height_scale = -0.05;
+	float height_scale = -0.02;
 	offset[0] = (render->viewDir[X]/2)*height * height_scale;
 	offset[1] = (render->viewDir[Y]/2)*height * height_scale;
 	
