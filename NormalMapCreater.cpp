@@ -3,16 +3,19 @@
 #include	"stdio.h"
 #include	"Gz.h"
 
+
+#define OUTPUTNORM "output_normalMap.ppm"
 GzColor	*normMap = NULL;
 float *heightMap = NULL;
 int normXs, normYs;
 int normReset = 1;
-int strength = 2;
+float strength = 1;
 
 int createGreyMap();
 int createNormalMap();
-float intensity(unsigned char* color, int s);
+float intensity(unsigned char* color, float s);
 int pos(int x, int y);
+void outputNormalMap();
 
 /* Image texture function */
 int NormalMapCreater() {
@@ -30,7 +33,7 @@ int createGreyMap()
 	FILE			*fd;
 
 	if (normReset) {          /* open and load texture file */
-		fd = fopen("rock.ppm", "rb");
+		fd = fopen("199.ppm", "rb");
 		if (fd == NULL) {
 			fprintf(stderr, "texture file not found\n");
 			exit(-1);
@@ -55,6 +58,7 @@ int createGreyMap()
 }
 
 int createNormalMap() {
+	
 	float topLeft, top, topRight, right, bottomRight, bottom, bottomLeft, left, dX, dY, dZ;
 	for (int y = 0; y < normYs; y++) {
 		for (int x = 0; x < normXs; x++ ) {
@@ -74,6 +78,9 @@ int createNormalMap() {
 			dX = (topRight + (2.0 * right) + bottomRight) - (topLeft + (2.0 * left) + bottomLeft);
 			dY = (bottomLeft + (2.0 * bottom) + bottomRight) - (topLeft + (2.0 * top) + topRight);
 			dZ = 255 / strength;
+			dX = ((dX + 255.0) / 2.0);
+			dY = ((dY + 255.0) / 2.0);
+			dZ = ((dZ + 255.0) / 2.0);
 			if (dX > 255)
 				dX = 255;
 			else if (dX < 0)
@@ -91,12 +98,27 @@ int createNormalMap() {
 			normMap[pos(x, y)][BLUE] = dZ;
 		}
 	}
-	
-	
+	outputNormalMap();
 	return GZ_SUCCESS;
 }
 
-float intensity(unsigned char* color, int s) {
+void outputNormalMap() {
+	FILE *outfile;
+	if ((outfile = fopen(OUTPUTNORM, "wb")) == NULL)
+	{
+		AfxMessageBox("The output file was not opened\n");
+	}
+	fprintf(outfile, "P6 %d %d 255\r", normXs, normYs);
+	for (int i = 0; i < normXs * normYs; i++) {
+		char r;
+		char g;
+		char b;
+		fprintf(outfile, "%c%c%c", (short)normMap[i][RED], (short)normMap[i][GREEN], (short)normMap[i][BLUE]);
+	}
+	fclose(outfile);
+}
+
+float intensity(unsigned char* color, float s) {
 	float c = (float)(0.3*(float)((int)color[RED]) + 0.59*(float)((int)color[GREEN]) + 0.11*(float)((int)color[BLUE]))*(float)(s);
 	if (c > 255)
 		c = 255;
