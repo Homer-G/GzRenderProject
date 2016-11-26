@@ -314,3 +314,8 @@ void CCS580HWView::OnScale()
 			GzPushMatrix(m_pApplication->m_pRender[i], scaleMat); 
 	}
 }
+
+void CCS580HWView::NextTexture()
+{
+	
+}

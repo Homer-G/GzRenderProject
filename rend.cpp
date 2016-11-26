@@ -34,8 +34,8 @@ void SetUpTangent(GzRender *render, GzCoord FragPos)
 	render->viewDir[Y] = tangentViewPos[Y] - tangentFragPos[Y];
 	render->viewDir[Z] = tangentViewPos[Z] - tangentFragPos[Z];
 	normalized(render->viewDir);
-
 }
+
 void ParallaxMapping(GzRender *render, GzTextureIndex uv)
 {
 	float height = 0;
@@ -51,7 +51,6 @@ void ParallaxMapping(GzRender *render, GzTextureIndex uv)
 	
 	uv[0] = uv[0] - offset[0];
 	uv[1] = uv[1] - offset[1];
-
 }
 
 void CalculateTBN(GzRender *render, GzCoord* vertices, GzTextureIndex* uvs) {
@@ -601,8 +600,6 @@ int GzPutTriangle(GzRender	*render, int numParts, GzToken *nameList, GzPointer *
 				float vz = vertices_screen[i][Z] / (INT_MAX - vertices_screen[i][Z]);
 				uv_coord[i][0] = uv[i][0] / (vz + 1);
 				uv_coord[i][1] = uv[i][1] / (vz + 1);
-				//uv_coord[i][0] = uv[i][0];
-				//uv_coord[i][1] = uv[i][1];
 			}
 		}
 	}
@@ -923,34 +920,11 @@ void LEE(GzRender* render, GzCoord* vertices, GzCoord* normals, GzTextureIndex* 
 						UV[0] = (A0*uvs[0][0] + A1*uvs[1][0] + A2*uvs[2][0]) / triA;
 						UV[1] = (A0*uvs[0][1] + A1*uvs[1][1] + A2*uvs[2][1]) / triA;
 
-						//UV[0] = (uvs[0][0] + uvs[1][0] + uvs[2][0]) / 3;
-						//UV[1] = (uvs[0][1] + uvs[1][1] + uvs[2][1]) / 3;
-
-						//float atPointz0 = z0 / (INT_MAX - z0);	// Warping as per z0
-						//float atPointz1 = z1 / (INT_MAX - z1);	// Warping as per z1
-						//float atPointz2 = z2 / (INT_MAX - z2);	// Warping as per z2
-						//float atPointzz = pointZ / (INT_MAX - pointZ);
-
-						//float u0 = uvs[0][0] / (atPointz0 + 1);
-						//float u1 = uvs[1][0] / (atPointz1 + 1);
-						//float u2 = uvs[2][0] / (atPointz2 + 1);
-
-						//float v0 = uvs[0][1] / (atPointz0 + 1);
-						//float v1 = uvs[1][1] / (atPointz1 + 1);
-						//float v2 = uvs[2][1] / (atPointz2 + 1);
-
-
-						//UV[0] = coeff1 * u0 + coeff2 * u1 + c_val * u2;
-						//UV[1] = coeff1 * v0 + coeff2 * v1 + c_val * v2;
-
 						GzTextureIndex uv;
 						float vz = pointZ / (INT_MAX - pointZ);
 
 						uv[0] = UV[0] * (vz + 1);
 						uv[1] = UV[1] * (vz + 1);
-
-						//uv[0] = UV[0];
-						//uv[1] = UV[1];
 
 						// Get Texture Color
 						GzColor textureColor;
@@ -1000,21 +974,17 @@ void LEE(GzRender* render, GzCoord* vertices, GzCoord* normals, GzTextureIndex* 
 						}
 
 
-
-
+						
 						GzCoord interp_N;
-						/*
+						
 						interp_N[X] = (A0*normals[0][X] + A1*normals[1][X] + A2*normals[2][X]) / triA;
 						interp_N[Y] = (A0*normals[0][Y] + A1*normals[1][Y] + A2*normals[2][Y]) / triA;
 						interp_N[Z] = (A0*normals[0][Z] + A1*normals[1][Z] + A2*normals[2][Z]) / triA;
-						*/
 						
-						interp_N[X] = (A0*normals[0][X] + A1*normals[1][X] + A2*normals[2][X]) / triA + normalMap[RED];
-						interp_N[Y] = (A0*normals[0][Y] + A1*normals[1][Y] + A2*normals[2][Y]) / triA + normalMap[GREEN];
-						interp_N[Z] = (A0*normals[0][Z] + A1*normals[1][Z] + A2*normals[2][Z]) / triA + normalMap[BLUE];
+						interp_N[X] = (normalMap[RED] * 2) - 1;
+						interp_N[Y] = (normalMap[GREEN] * 2) - 1;
+						interp_N[Z] = (normalMap[BLUE] * 2) - 1;
 						
-						
-
 						normalized(interp_N);
 
 						//uv[0] = UV[0];

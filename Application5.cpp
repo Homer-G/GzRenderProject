@@ -359,6 +359,3 @@ int Application5::Clean()
 	else
 		return(GZ_SUCCESS);
 }
-
-
-

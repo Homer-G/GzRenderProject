@@ -2,10 +2,13 @@
 #include    "stdafx.h" 
 #include	"stdio.h"
 #include	"Gz.h"
+#include	<string>
 
 GzColor	*image = NULL;
 int xs, ys;
 int reset = 1;
+int textureIndex = 0;
+std::string fileType(".ppm");
 
 /* Image texture function */
 int tex_fun(float u, float v, GzColor color)
@@ -15,9 +18,9 @@ int tex_fun(float u, float v, GzColor color)
   char  		foo[8];
   int   		i, j;
   FILE			*fd;
-
+  
   if (reset) {          /* open and load texture file */
-    fd = fopen ("199.ppm", "rb");
+    fd = fopen ((std::to_string(textureIndex) + fileType).c_str(), "rb");
     if (fd == NULL) {
       fprintf (stderr, "texture file not found\n");
       exit(-1);

@@ -53,6 +53,7 @@ protected:
 	afx_msg void OnRotate();
 	afx_msg void OnTranslate();
 	afx_msg void OnScale();
+	afx_msg void NextTexture();
 	//}}AFX_MSG
 	DECLARE_MESSAGE_MAP()
 };

@@ -2,7 +2,7 @@
 #include    "stdafx.h" 
 #include	"stdio.h"
 #include	"Gz.h"
-
+#include	<string>
 
 #define OUTPUTNORM "output_normalMap.ppm"
 GzColor	*normMap = NULL;
@@ -16,6 +16,8 @@ int createNormalMap();
 float intensity(unsigned char* color, float s);
 int pos(int x, int y);
 void outputNormalMap();
+extern int textureIndex;
+extern std::string fileType;
 
 /* Image texture function */
 int NormalMapCreater() {
@@ -31,9 +33,8 @@ int createGreyMap()
 	char  		foo[8];
 	int   		i, j;
 	FILE			*fd;
-
 	if (normReset) {          /* open and load texture file */
-		fd = fopen("199.ppm", "rb");
+		fd = fopen((std::to_string(textureIndex) + fileType).c_str(), "rb");
 		if (fd == NULL) {
 			fprintf(stderr, "texture file not found\n");
 			exit(-1);

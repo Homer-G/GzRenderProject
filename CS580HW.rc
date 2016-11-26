@@ -116,6 +116,11 @@ BEGIN
         MENUITEM "&Translate Object",           IDM_TRANSLATE
         MENUITEM "&Scale Object",               IDM_SCALE
     END
+	POPUP "&Bumpmap"
+	BEGIN
+		MENUITEM "&Next Texture"				IDM_NEXTTEXTURE
+		MENUITEM "&Previous Texture"			IDM_PREVTEXTURE
+	END
     POPUP "&View"
     BEGIN
         MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR

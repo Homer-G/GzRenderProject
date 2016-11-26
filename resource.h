@@ -24,6 +24,8 @@
 #define IDM_ROTATE                      32773
 #define IDM_TRANSLATE                   32774
 #define IDM_SCALE                       32775
+#define IDM_NEXTTEXTURE					32776
+#define IDM_PREVTEXTURE					32777
 
 // Next default values for new objects
 // 
