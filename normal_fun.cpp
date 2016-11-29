@@ -40,6 +40,8 @@ int normal_fun(float u, float v, GzColor normal)
 
 		//reset_normal = 0;          /* init is done */
 		//fclose(fd);
+
+
 		NormalMapCreater();
 		//image_normal = normMap;
 		xs_normal = normXs;

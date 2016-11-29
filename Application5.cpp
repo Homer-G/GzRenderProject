@@ -118,9 +118,9 @@ int Application5::Initialize()
 
 
 #if 1 	/* set up app-defined camera if desired, else use camera defaults */
-		camera.position[X] = 0;
+		camera.position[X] = -10;
 		camera.position[Y] = 0;
-		camera.position[Z] = -10;
+		camera.position[Z] = 0;
 
 		camera.lookat[X] = 0;
 		camera.lookat[Y] = 0.7;
@@ -140,7 +140,7 @@ int Application5::Initialize()
 
 		/* Light */
 		GzLight	light1 = { {-0.7071, 0.7071, 0}, {0.5, 0.5, 0.5} };
-		GzLight	light2 = { {0, -0.7071, -0.7071}, {0.8, 0.8, 0.8} };
+		GzLight	light2 = { {0, -0.7071, -0.7071}, {0.5, 0.5, 0.5} };
 		GzLight	light3 = { {0.7071, 0.0, -0.7071}, {0.5, 0.5, 0.5} };
 		GzLight	ambientlight = { {0, 0, 0}, {0.3, 0.3, 0.3} };
 

@@ -6,7 +6,7 @@
 #include	"Gz.h"
 #include	"rend.h"
 
-//#define PARALLAX_MAP
+#define PARALLAX_MAP
 
 extern float height_fun(float u, float v, float normal);/*normal map*/
 
@@ -45,7 +45,7 @@ void ParallaxMapping(GzRender *render, GzTextureIndex uv)
 	height = height_fun(uv[0], uv[1], height);
 
 	float offset[2];
-	float height_scale = -0.02;
+	float height_scale = -0.05;
 	offset[0] = (render->viewDir[X]/2)*height * height_scale;
 	offset[1] = (render->viewDir[Y]/2)*height * height_scale;
 	
@@ -1012,9 +1012,8 @@ void LEE(GzRender* render, GzCoord* vertices, GzCoord* normals, GzTextureIndex* 
 						interp_N[X] = (A0*normals[0][X] + A1*normals[1][X] + A2*normals[2][X]) / triA + normalMap[RED];
 						interp_N[Y] = (A0*normals[0][Y] + A1*normals[1][Y] + A2*normals[2][Y]) / triA + normalMap[GREEN];
 						interp_N[Z] = (A0*normals[0][Z] + A1*normals[1][Z] + A2*normals[2][Z]) / triA + normalMap[BLUE];
-						
-						
 
+		
 						normalized(interp_N);
 
 						//uv[0] = UV[0];

@@ -4,6 +4,7 @@
 #include	"Gz.h"
 
 
+#define OUTPUTGRAY "output_heightMap.ppm"
 #define OUTPUTNORM "output_normalMap.ppm"
 GzColor	*normMap = NULL;
 float *heightMap = NULL;
@@ -16,6 +17,7 @@ int createNormalMap();
 float intensity(unsigned char* color, float s);
 int pos(int x, int y);
 void outputNormalMap();
+void outputGrayScaleMap();
 
 /* Image texture function */
 int NormalMapCreater() {
@@ -33,7 +35,7 @@ int createGreyMap()
 	FILE			*fd;
 
 	if (normReset) {          /* open and load texture file */
-		fd = fopen("199.ppm", "rb");
+		fd = fopen("rock.ppm", "rb");
 		if (fd == NULL) {
 			fprintf(stderr, "texture file not found\n");
 			exit(-1);
@@ -54,6 +56,7 @@ int createGreyMap()
 		normReset = 0;          /* init is done */
 		fclose(fd);
 	}
+	outputGrayScaleMap();
 	return GZ_SUCCESS;
 }
 
@@ -110,10 +113,22 @@ void outputNormalMap() {
 	}
 	fprintf(outfile, "P6 %d %d 255\r", normXs, normYs);
 	for (int i = 0; i < normXs * normYs; i++) {
-		char r;
-		char g;
-		char b;
+		
 		fprintf(outfile, "%c%c%c", (short)normMap[i][RED], (short)normMap[i][GREEN], (short)normMap[i][BLUE]);
+	}
+	fclose(outfile);
+}
+
+void outputGrayScaleMap() {
+	FILE *outfile;
+	if ((outfile = fopen(OUTPUTGRAY, "wb")) == NULL)
+	{
+		AfxMessageBox("The output file was not opened\n");
+	}
+	fprintf(outfile, "P6 %d %d 255\r", normXs, normYs);
+	for (int i = 0; i < normXs * normYs; i++) {
+		
+		fprintf(outfile, "%c%c%c", (short)heightMap[i], (short)heightMap[i], (short)heightMap[i]);
 	}
 	fclose(outfile);
 }
